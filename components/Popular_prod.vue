@@ -16,7 +16,7 @@
         :key="index"
       >
         <div class="relative">
-          <img :src="item.thumbnail" alt="Product Image" />
+          <img :src="item.image" alt="Product Image" />
           <img
             class="z-10 absolute top-0 right-0 translate-y-1/2 cursor-pointer"
             @click="toggleLike(item.id)"

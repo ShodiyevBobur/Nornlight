@@ -1,4 +1,4 @@
-<template>
+<template>  
   <div class="container py-[71px]">
     <div class="flex w-full items-center mb-[71px] justify-between">
       <h4 class="text-primary font-bold text-[40px]">
