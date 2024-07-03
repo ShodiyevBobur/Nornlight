@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-3">
+  <div class="container md:mt-3">
     <div
       class="flex w-full justify-between mb-2 text-primary font-semibold text-sm"
     >
@@ -12,9 +12,10 @@
           >{{ item }}</a
         >
       </div>
-      <div class="md:hidden flex  w-full items-center gap-5 ">
-        <button>
+      <div class="md:hidden flex w-full items-center absolute  z-50 top-0 gap-5 pt-5">
+        <button @click="isMediaMenu = !isMediaMenu">
           <svg
+            v-if="!isMediaMenu"
             width="30"
             height="16"
             viewBox="0 0 30 16"
@@ -27,6 +28,16 @@
               stroke-width="2"
             />
           </svg>
+          <svg
+            v-else
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M1 1L10 10M19 19L10 10M10 10L1 19L19 1" stroke="black" />
+          </svg>
         </button>
         <img src="/MainLogo.svg" class="cursor-pointer w-2/5" alt="Logo" />
 
@@ -36,16 +47,11 @@
           :key="index"
         >
           <div class="flex flex-col items-center gap-[6px]">
-            <img
-              :src="item"
-              class="cursor-pointer 'w-3/4'"
-              alt="Logos "
-            />
-          
+            <img :src="item" class="cursor-pointer 'w-3/4'" alt="Logos " />
           </div>
         </div>
-
       </div>
+      <div v-if="isMediaMenu"  class="w-screen h-screen fixed top-0 z-30 left-0 bg-primary/50 md:hidden"></div>
       <div class="flex gap-6 max-md:hidden">
         <p class="opacity-100">8 (800) 890-46-56</p>
         <a href="#" class="opacity-50">Заказать звонок</a>
@@ -53,13 +59,40 @@
     </div>
   </div>
   <div
-    class="sticky top-0 left-0 w-full py-3 z-40 shadow"
+    v-if="isMediaMenu"
+    class="gap-7 absolute z-50 top-14 w-full bg-white md:hidden shadow-md"
+  >
+    <a
+      href="#"
+      v-for="(item, index) in sections"
+      :key="index"
+      class="opacity-50 block my-3 border-b pb-3 text-center"
+      >{{ item }}</a
+    >
+    <div
+      @click="dropdownClick = !dropdownClick"
+      class="flex px-[27px] gap-[9px] cursor-pointer text-center justify-center my-5 items-center rounded-full bg-primary py-[14px] w-[96%] mx-auto"
+    >
+      <img src="/catalog.svg" alt="category" />
+      <p class="text-white font-semibold">Каталог</p>
+    </div>
+    <p class="opacity-100 text-center">8 (800) 890-46-56</p>
+    <a href="#" class="block opacity-50 text-center w-full my-5"
+      >Заказать звонок</a
+    >
+  </div>
+  <div
+    class="sticky top-0 left-0 w-full py-3 z-30 shadow"
     :class="isScrolled ? 'backdrop-blur-lg bg-white/30' : 'bg-white'"
   >
     <div class="container">
-      <div class="flex w-full items-center justify-between   md:gap-4">
+      <div class="flex w-full items-center justify-between md:gap-4">
         <div class="flex gap-[29px]">
-          <img src="/MainLogo.svg" class="cursor-pointer max-md:hidden" alt="Logo" />
+          <img
+            src="/MainLogo.svg"
+            class="cursor-pointer max-md:hidden"
+            alt="Logo"
+          />
           <div
             @click="dropdownClick = !dropdownClick"
             class="flex px-[27px] gap-[9px] cursor-pointer items-center rounded-full bg-primary py-[14px] max-md:hidden"
@@ -68,7 +101,7 @@
             <p class="text-white font-semibold">Каталог</p>
           </div>
         </div>
-        <div class="relative w-[45%] max-md:w-full">
+        <div class="relative w-[45%] max-md:w-full max-md:mt-10">
           <input
             class="font-semibold outline-none pl-[27px] pr-12 h-full py-[14px] placeholder:text-primary border border-primary rounded-full w-full"
             type="text"
@@ -116,9 +149,10 @@ const sections = ref([
 
 const bottomSections = ref(["Избранное", "Сравнение", "Корзина"]);
 const image = ref(["/like.svg", "/compare.svg", "/cart.svg"]);
-const image2 = ref(["/like.svg",  "/cart.svg"]);
+const image2 = ref(["/like.svg", "/cart.svg"]);
 
 const isScrolled = ref(false);
+const isMediaMenu = ref(false);
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 0;
