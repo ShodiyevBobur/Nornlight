@@ -51,7 +51,7 @@
       </div>
     </div>
     <div
-        class="flex items-center py-[8px] cursor-pointer gap-[10px] hover:gap-4 duration-300 w-full rounded-full border border-primary md:hidden"
+        class="flex items-center py-[8px] cursor-pointer gap-[10px] hover:gap-4 duration-300 mt-6 w-full rounded-full border border-primary md:hidden"
       >
         <p class="ml-12 font-medium text-primary">О компании</p>
         <p class="text-2xl font-medium mb-1 text-primary">&rarr;</p>
