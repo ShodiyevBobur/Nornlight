@@ -1,15 +1,15 @@
 <template>
-  <div class="container my-20">
-    <div class="flex justify-between mb-10 items-center">
+  <div class="container md:my-20">
+    <div class="flex justify-between md:mb-10 max-md:mb-8 items-center">
       <h4 class="font-bold text-[40px]">Блог</h4>
       <div
-        class="flex items-center py-[8px] cursor-pointer gap-[10px] hover:gap-4 duration-300 w-[220px] rounded-full border border-primary"
+        class="flex items-center py-[8px] cursor-pointer gap-[10px] hover:gap-4 duration-300 w-[220px] rounded-full border border-primary max-md:hidden"
       >
         <p class="ml-12 font-medium text-primary">Весь каталог</p>
         <p class="text-2xl font-medium mb-1 text-primary">&rarr;</p>
       </div>
     </div>
-    <div class="grid grid-cols-3 gap-5">
+    <div class="md:grid grid-cols-3 gap-5">
       <div
         class="w-full h-full flex flex-col-reverse gap-[29px] justify-between border-b border-primary/10 pb-8"
         v-for="(item, index) in candles"
@@ -44,6 +44,12 @@
         <img class="w-full" :src="item" alt="" />
       </div>
     </div>
+     <div
+        class="flex items-center py-[8px] cursor-pointer gap-[10px] hover:gap-4 duration-300 w-full rounded-full border border-primary md:hidden"
+      >
+        <p class="ml-12 font-medium text-primary">Весь каталог</p>
+        <p class="text-2xl font-medium mb-1 text-primary">&rarr;</p>
+      </div>
   </div>
 </template>
 

@@ -1,9 +1,10 @@
 <template>
-  <div class="container my-[100px]">
-    <div class="flex w-full gap-[300px]">
-      <h4 class="text-primary text-[40px] font-bold">
+  <div class="container md:my-[100px] max-md:my-11">
+    <div class="md:flex w-full gap-[300px]">
+      <h4 class="text-primary text-[40px] font-bold max-md:hidden">
         Производство светильников
       </h4>
+      <h4 class="text-primary text-[25px] font-bold mb-8 md:hidden">Блог</h4>
       <div class="text-lg font-medium flex flex-col gap-6">
         <p>
           Интернет-магазин NORNLIGHT предлагает широкий ассортимент светильников

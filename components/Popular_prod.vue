@@ -9,7 +9,7 @@
         <p class="text-2xl font-medium mb-1 text-primary">&rarr;</p>
       </div>
     </div>
-    <div class="grid md:grid-cols-4 max-md:grid-cols-2 gap-5">
+    <div class="grid md:grid-cols-4 max-md:grid-cols-2 md:gap-5">
       <div
         class="p-[27px] pt-[11px] w-full h-full border border-[#D9D9D9] flex gap-4 flex-col"
         v-for="(item, index) in products"
@@ -38,7 +38,7 @@
               </p>
               <img
                 @click="toggleShopped(item.id)"
-                class="py-2 p-5 cursor-pointer rounded-full w-[30%]"
+                class="py-2 p-5 cursor-pointer rounded-full md:w-[30%] max-md:w-[50%]"
                 :src="item.shopped ? '/cart3.svg' : '/cart2.svg'"
                 :class="
                   item.shopped ? 'bg-white border border-primary' : 'bg-primary'

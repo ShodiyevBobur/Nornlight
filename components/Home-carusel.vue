@@ -1,10 +1,10 @@
 <template>  
   <div class="container py-[71px]">
-    <div class="flex w-full items-center mb-[71px] justify-between">
-      <h4 class="text-primary font-bold text-[40px]">
+    <div class="flex w-full items-center md:mb-[71px] max-md:mb-[40px] justify-between">
+      <h4 class="text-primary font-bold md:text-[40px] max-md:text-[25px]">
         Только проверенные бренды
       </h4>
-      <div class="flex gap-[10px] items-center">
+      <div class="flex gap-[10px] items-center max-md:hidden">
         <button class="text-2xl h-[26px] w-[39px] flex items-center justify-center  opacity-50 border border-primary rounded-full">
           <span class="mb-1.5">&#8592;</span>
         </button>

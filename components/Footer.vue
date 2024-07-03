@@ -1,10 +1,10 @@
 <template>
   <div class="bg-second py-[79px]">
     <div class="container">
-      <div class="flex w-full justify-between">
-        <div class="flex flex-col w-1/4 gap-[35px]">
-          <img src="/MainLogo.svg" @click="router.push('/')" class="w-3/4 cursor-pointer" alt="logo" />
-          <p class="text-primary text-2xl font-semibold">8 (800) 890-46-56</p>
+      <div class="md:flex w-full justify-between">
+        <div class="flex flex-col md:w-1/4 max-md:w-3/4 gap-[35px]">
+          <img src="/MainLogo.svg" @click="router.push('/')" class="md:w-3/4  max-md:w-3/5 cursor-pointer" alt="logo" />
+          <p class="text-primary md:text-2xl font-semibold">8 (800) 890-46-56</p>
           <img src="/card.png" class="w-3/4 cursor-pointer" alt="card" />
           <p class="font-semibold underline opacity-50 cursor-pointer">
             Политика конфидециальности
