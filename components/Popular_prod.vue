@@ -11,7 +11,7 @@
     </div>
     <div class="grid md:grid-cols-4 max-md:grid-cols-2 md:gap-5">
       <div
-        class="p-[27px] pt-[11px] w-full h-full border border-[#D9D9D9] flex gap-4 flex-col"
+        class="p-[27px] pt-[11px] w-full h-full md:border md:border-[#D9D9D9] flex gap-4 flex-col"
         v-for="(item, index) in products"
         :key="index"
       >
