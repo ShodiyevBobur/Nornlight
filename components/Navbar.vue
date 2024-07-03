@@ -53,7 +53,7 @@
     </div>
   </div>
   <div
-    class="sticky top-0 left-0 w-full py-3 z-40"
+    class="sticky top-0 left-0 w-full py-3 z-40 shadow"
     :class="isScrolled ? 'backdrop-blur-lg bg-white/30' : 'bg-white'"
   >
     <div class="container">
