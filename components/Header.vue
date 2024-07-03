@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex justify-center max-md:container ">
+  <div class="w-full flex justify-center max-md:container max-md:mt-3 ">
     <div class="bg-second md:rounded-[50px] md:mt-8 md:w-[98%] w-full max-md:rounded-[30px]">
       <div class="container">
         <swiper
