@@ -2,14 +2,6 @@
   <div class="container md:my-20">
     <div class="flex justify-between md:mb-10 max-md:mb-8 items-center">
       <h4 class="font-bold text-[40px]">Блог</h4>
-      <nuxt-link to="/Blog">
-        <div
-          class="flex items-center py-[8px] cursor-pointer gap-[10px] hover:gap-4 duration-300 w-[220px] rounded-full border border-primary max-md:hidden"
-        >
-          <p class="ml-12 font-medium text-primary">Весь каталог</p>
-          <p class="text-2xl font-medium mb-1 text-primary">&rarr;</p>
-        </div>
-      </nuxt-link>
     </div>
     <div class="md:grid grid-cols-3 gap-5">
       <div
@@ -46,21 +38,32 @@
         <img class="w-full" :src="item" alt="" />
       </div>
     </div>
-    <nuxt-link to="/Blog">
-      <div
-        class="flex items-center py-[8px] cursor-pointer gap-[10px] hover:gap-4 duration-300 w-full rounded-full border border-primary md:hidden"
-      >
-        <p class="ml-12 font-medium text-primary">Весь каталог</p>
-        <p class="text-2xl font-medium mb-1 text-primary">&rarr;</p>
-      </div>
-    </nuxt-link>
   </div>
 </template>
 
 <script setup>
-const candles = ref(["/house1.png", "/house2.png", "/house3.png"]);
+const candles = ref([
+  "/house1.png",
+  "/house2.png",
+  "/house3.png",
+  "/house1.png",
+  "/house2.png",
+  "/house3.png",
+]);
 
 const datas = ref([
+  {
+    title: "Как правильно освещать дом снаружи?",
+    date: "01.01.2024",
+  },
+  {
+    title: "Как правильно освещать дом снаружи?",
+    date: "01.01.2024",
+  },
+  {
+    title: "Как правильно освещать дом снаружи?",
+    date: "01.01.2024",
+  },
   {
     title: "Как правильно освещать дом снаружи?",
     date: "01.01.2024",

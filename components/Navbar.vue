@@ -9,10 +9,13 @@
           v-for="(item, index) in sections"
           :key="index"
           class="opacity-50"
+          
           >{{ item }}</a
         >
       </div>
-      <div class="md:hidden flex w-full items-center absolute  z-50 top-0 gap-5 pt-5">
+      <div
+        class="md:hidden flex w-full items-center absolute z-50 top-0 gap-5 pt-5"
+      >
         <button @click="isMediaMenu = !isMediaMenu">
           <svg
             v-if="!isMediaMenu"
@@ -51,7 +54,10 @@
           </div>
         </div>
       </div>
-      <div v-if="isMediaMenu"  class="w-screen h-screen fixed top-0 z-30 left-0 bg-primary/50 md:hidden"></div>
+      <div
+        v-if="isMediaMenu"
+        class="w-screen h-screen fixed top-0 z-30 left-0 bg-primary/50 md:hidden"
+      ></div>
       <div class="flex gap-6 max-md:hidden">
         <p class="opacity-100">8 (800) 890-46-56</p>
         <a href="#" class="opacity-50">Заказать звонок</a>
@@ -88,11 +94,13 @@
     <div class="container">
       <div class="flex w-full items-center justify-between md:gap-4">
         <div class="flex gap-[29px]">
-          <img
-            src="/MainLogo.svg"
-            class="cursor-pointer max-md:hidden"
-            alt="Logo"
-          />
+          <nuxt-link to="/">
+            <img
+              src="/MainLogo.svg"
+              class="cursor-pointer max-md:hidden"
+              alt="Logo"
+            />
+          </nuxt-link>
           <div
             @click="dropdownClick = !dropdownClick"
             class="flex px-[27px] gap-[9px] cursor-pointer items-center rounded-full bg-primary py-[14px] max-md:hidden"
