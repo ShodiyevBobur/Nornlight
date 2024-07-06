@@ -4,14 +4,14 @@
       class="flex w-full justify-between mb-2 text-primary font-semibold text-sm"
     >
       <div class="flex gap-7 max-md:hidden">
-        <a
-          href="#"
+        <button
           v-for="(item, index) in sections"
           :key="index"
           class="opacity-50"
-          
-          >{{ item }}</a
+          @click="ChangePage(index)"
         >
+          {{ item }}
+        </button>
       </div>
       <div
         class="md:hidden flex w-full items-center absolute z-50 top-0 gap-5 pt-5"
@@ -42,8 +42,9 @@
             <path d="M1 1L10 10M19 19L10 10M10 10L1 19L19 1" stroke="black" />
           </svg>
         </button>
-        <img src="/MainLogo.svg" class="cursor-pointer w-2/5" alt="Logo" />
-
+        <nuxt-link to="/" class="w-2/5">
+          <img src="/MainLogo.svg" class="cursor-pointer" alt="Logo" />
+        </nuxt-link>
         <div
           class="flex h-full items-center ml-4"
           v-for="(item, index) in image2"
@@ -73,15 +74,17 @@
       v-for="(item, index) in sections"
       :key="index"
       class="opacity-50 block my-3 border-b pb-3 text-center"
+      @click="ChangePage(index)"
       >{{ item }}</a
     >
-    <div
-      @click="dropdownClick = !dropdownClick"
-      class="flex px-[27px] gap-[9px] cursor-pointer text-center justify-center my-5 items-center rounded-full bg-primary py-[14px] w-[96%] mx-auto"
-    >
-      <img src="/catalog.svg" alt="category" />
-      <p class="text-white font-semibold">Каталог</p>
-    </div>
+    <nuxt-link to="/Catalog">
+      <div
+        class="flex px-[27px] gap-[9px] cursor-pointer text-center justify-center my-5 items-center rounded-full bg-primary py-[14px] w-[96%] mx-auto"
+      >
+        <img src="/catalog.svg" alt="category" />
+        <p class="text-white font-semibold">Каталог</p>
+      </div>
+    </nuxt-link>
     <p class="opacity-100 text-center">8 (800) 890-46-56</p>
     <a href="#" class="block opacity-50 text-center w-full my-5"
       >Заказать звонок</a
@@ -101,13 +104,15 @@
               alt="Logo"
             />
           </nuxt-link>
-          <div
-            @click="dropdownClick = !dropdownClick"
-            class="flex px-[27px] gap-[9px] cursor-pointer items-center rounded-full bg-primary py-[14px] max-md:hidden"
-          >
-            <img src="/catalog.svg" alt="category" />
-            <p class="text-white font-semibold">Каталог</p>
-          </div>
+          <nuxt-link to="/Catalog">
+            <div
+              @click="dropdownClick = !dropdownClick"
+              class="flex px-[27px] gap-[9px] cursor-pointer items-center rounded-full bg-primary py-[14px] max-md:hidden"
+            >
+              <img src="/catalog.svg" alt="category" />
+              <p class="text-white font-semibold">Каталог</p>
+            </div>
+          </nuxt-link>
         </div>
         <div class="relative w-[45%] max-md:w-full max-md:mt-10">
           <input
@@ -125,8 +130,17 @@
           class="flex h-full items-center max-md:hidden"
           v-for="(item, index) in image"
           :key="index"
+          @click="goPage(index)"
         >
-          <div class="flex flex-col items-center gap-[6px]">
+          <div class="flex relative flex-col items-center gap-[6px]">
+            <span
+              :class="index == 1 ? 'hidden' : ''"
+              class="absolute -translate-y-1/2 top-0 w-5 h-5 flex justify-center items-center rounded-full right-0 bg-red-500 z-50 text-white text-sm"
+              >{{
+                index == 0 ? store.likedProducts.length : store.basket.length
+              }}</span
+            >
+
             <img
               :src="item"
               class="cursor-pointer"
@@ -158,9 +172,14 @@ const sections = ref([
 const bottomSections = ref(["Избранное", "Сравнение", "Корзина"]);
 const image = ref(["/like.svg", "/compare.svg", "/cart.svg"]);
 const image2 = ref(["/like.svg", "/cart.svg"]);
+import { usePiniaStore } from "../store";
+
+const store = usePiniaStore();
 
 const isScrolled = ref(false);
 const isMediaMenu = ref(false);
+
+const router = useRouter();
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 0;
@@ -173,4 +192,33 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
 });
+const ChangePage = (index) => {
+  if (index == 0) {
+    router.push("/About");
+  }
+  if (index == 1) {
+    router.push("/ShoppingPayment");
+  }
+  if (index == 2) {
+    router.push("/Return");
+  }
+  if (index == 3) {
+    router.push("/Garant");
+  }
+  if (index == 4) {
+    router.push("/Kantakt");
+  }
+  if (index == 5) {
+    router.push("/Blog");
+  }
+};
+
+const goPage = (index) => {
+  if (index == 0) {
+    router.push("/Fovorites");
+  }
+  if (index == 2) {
+    router.push("/Basket");
+  }
+};
 </script>

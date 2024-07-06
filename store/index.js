@@ -13,22 +13,23 @@ export const usePiniaStore = defineStore("pinia", {
 
       if (index === -1) {
         this.likedProducts.push(product);
-      }else{
+      } else {
         this.likedProducts.splice(index, 1);
       }
       // console.log(this.likedProducts);
-
-
     },
-    addToBasket(product) {
-       const index = this.basket.findIndex(
-         (item) => item.id === product.id
-       );
-       if (index === -1) {
-         this.basket.push(product);
-       }else{
-          this.basket.splice(index, 1);
-       }
+    addToBasket(product, quantity) {
+      const index = this.basket.findIndex((item) => item.id === product.id);
+      if (index === -1) {
+        this.basket.push({ ...product, quantity: quantity || 1 });
+      } else {
+        this.basket.splice(index, 1);
+      }
+
+      console.log(this.basket);
+    },
+    removeToBasket(index) {
+      this.basket.splice(index, 1);
 
       console.log(this.basket);
     },

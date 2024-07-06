@@ -28,11 +28,7 @@
               @click="toggleShopped(props.data.id)"
               class="py-2 p-5 cursor-pointer rounded-full md:w-[30%] max-md:w-[50%]"
               :src="shop ? '/cart3.svg' : '/cart2.svg'"
-              :class="
-                props.data.shopped
-                  ? 'bg-white border border-primary'
-                  : 'bg-primary'
-              "
+              :class="shop ? 'bg-white border border-primary' : 'bg-primary'"
               alt="Cart Button"
             />
           </div>
@@ -57,11 +53,15 @@ const shop = computed(() => {
 });
 
 const toggleLike = (id) => {
-    store.addProductToLiked(props.data)
-}
+  store.addProductToLiked(props.data);
+};
 const toggleShopped = (id) => {
-    store.addToBasket(props.data)
-}
+  if (shop.value) {
+    alert("Bu mahsulot allaqachon mavjud");
+  } else {
+    store.addToBasket(props.data);
+  }
+};
 
 const props = defineProps({
   data: Object,

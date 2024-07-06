@@ -31,9 +31,19 @@
             <button @click="addToCart()" class="px-2 py-1">+</button>
           </div>
 
-          <button class="ml-5 bg-[#454545] text-white rounded px-4">
+          <button
+            class="ml-5 rounded px-4 bg-[#454545] text-white"
+            @click="toggleShopped()"
+          >
             В корзину
           </button>
+          <img
+            class="cursor-pointer ml-3"
+            @click="toggleLike(product)"
+            :src="like ? '/like2.svg' : '/like.svg'"
+            alt=""
+          />
+
         </div>
       </div>
     </div>
@@ -69,7 +79,7 @@
     </div>
     <div class="flex justify-between px-4 py-4">
       <p class="w-1/2">Производитель</p>
-      <p >Scott</p>
+      <p>Scott</p>
     </div>
     <div class="flex justify-between px-4 py-4 bg-[#F8F8F8]">
       <p class="w-1/2">Покрышки</p>
@@ -111,10 +121,33 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRoute } from "vue-router";
+import { usePiniaStore } from "../store";
 
 const route = useRoute();
 const product = ref(null);
 const count = ref(1);
+
+const store = usePiniaStore();
+
+const like = computed(() => {
+  const index = store.likedProducts.findIndex((p) => p.id == route.params.id);
+  return index != -1;
+});
+const shop = computed(() => {
+  const index = store.basket.findIndex((p) => p.id == route.params.id);
+  return index != -1;
+});
+
+const toggleLike = (product) => {
+  store.addProductToLiked(product);
+};
+const toggleShopped = () => {
+  if (shop.value) {
+    alert("Bu mahsulot allaqachon mavjud");
+  } else {
+    store.addToBasket(product.value, count.value);
+  }
+};
 
 const addToCart = () => {
   count.value++;
