@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
+    "@element-plus/nuxt",
   ],
   app: {
     head: {
@@ -36,5 +37,4 @@ export default defineNuxtConfig({
     },
   },
   plugins: [],
-  
 });
