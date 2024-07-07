@@ -8,7 +8,11 @@
       <p>Артикул</p>
       <p>Количество</p>
     </div>
-    <div v-for="(item, index) in store.basket" class="pt-2 bg-[#F2F2F2] px-3">
+    <div
+      v-for="(item, index) in store.basket"
+      :key="index"
+      class="pt-2 bg-[#F2F2F2] px-3"
+    >
       <div class="py-2 bg-[#F2F2F2] border-t flex justify-between gap-4">
         <img :src="item.image" alt="" class="w-[10%]" />
         <div>
@@ -19,12 +23,11 @@
           Светильник RADUGA COMBO XS Промышленное освещение; 50Вт; 230В; S4; XS;
         </p>
         <p>RAD-COMBO-50/XXX/230/XXX/XXX/S4/XS</p>
-
         <div>
           <div class="flex bg-[#E5E5E5] rounded gap-2 mt-6">
             <button @click="removeCart(item)" class="px-2 py-1">-</button>
-            <p class="px-2] py-1">{{ item.quantity }}</p>
-            <button @click="item.quantity++" class="px-2 py-1">+</button>
+            <p class="px-2 py-1">{{ item.quantity }}</p>
+            <button @click="addToCart(item)" class="px-2 py-1">+</button>
             <div>
               <button @click="DeleteBasket(index)">
                 <svg
@@ -59,17 +62,20 @@
       <div class="flex flex-col lg:flex-row lg:space-x-4 mb-4">
         <input
           type="text"
+          v-model="order.fio"
           placeholder="ФИО"
           class="flex-1 p-2 border rounded mb-2 lg:mb-0"
           required
         />
         <input
+          v-model="order.phone"
           type="text"
           placeholder="телефон"
           class="flex-1 p-2 border rounded mb-2 lg:mb-0"
           required
         />
         <input
+          v-model="order.email"
           type="text"
           placeholder="Электронная почта"
           class="flex-1 p-2 border rounded mb-2 lg:mb-0"
@@ -82,12 +88,14 @@
       </h2>
       <div class="w-full lg:w-[calc(65%-24px)]">
         <input
+          v-model="order.address"
           type="text"
           placeholder="Адрес доставки"
           class="w-full p-2 border rounded mb-4 lg:mb-5"
           required
         />
         <textarea
+          v-model="order.comment"
           placeholder="Комментарий"
           class="w-full p-4 border rounded-[15px] resize-none h-40"
           required
@@ -104,28 +112,30 @@
       <div class="flex max-md:flex-col lg:gap-10 pt-8 lg:pt-12 pb-12 lg:pb-20">
         <span
           class="text-[#454545] text-2xl py-3 lg:py-0 lg:text-xl font-semibold mb-2 lg:mb-0"
-          >Товары..........................{{ totalPrice() }}</span
         >
-        <span class="text-[#454545] text-2xl lg:text-2xl font-semibold"
-          >Доставка...........................{{ dastafka() }}</span
-        >
+          Товары..........................{{ totalPrice }} $
+        </span>
+        <span class="text-[#454545] text-2xl lg:text-2xl font-semibold">
+          Доставка...........................{{ deliveryCost }} $
+        </span>
       </div>
       <h2
         class="pb-6 lg:pb-8 text-[#454545] text-2xl lg:text-3xl font-bold mb-4 lg:mb-2"
       >
-        {{ Total }}
+        {{ total }} $
       </h2>
       <div class="flex max-md:flex-col items-center gap-8">
         <button
           class="py-4 lg:py-5 px-[170px] lg:px-[138px] bg-gray-700 rounded-full text-white"
+          @click="AddZakas"
         >
           Купить
         </button>
         <label class="flex items-center mb-4 lg:mb-0 lg:mr-4">
           <input class="mr-2" type="radio" />
-          <span class="text-[#454545] text-lg font-semibold"
-            >Я согласен на обработку моих персональных данных</span
-          >
+          <span class="text-[#454545] text-lg font-semibold">
+            Я согласен на обработку моих персональных данных
+          </span>
         </label>
       </div>
     </div>
@@ -133,44 +143,56 @@
 </template>
 
 <script setup>
+import { ref, computed } from "vue";
 import { usePiniaStore } from "../store";
 
 const store = usePiniaStore();
 
-// const like = computed(() => {
-//   const index = store.likedProducts.findIndex((p) => p.id == props.data.id);
-//   return index != -1;
-// });
-// const shop = computed(() => {
-//   const index = store.basket.findIndex((p) => p.id == props.data.id);
-//   return index != -1;
-// });
+const order = ref({
+  fio: "",
+  phone: "",
+  email: "",
+  address: "",
+  comment: "",
+  basket: [],
+});
+
+// console.log(typeof order.value.basket);
+// console.log(store.orders);
+const AddZakas = () => {
+    order.value.basket = [];
+  order.value.basket.push(store.basket)
+  store.addOrders(order.value);
+};
 
 const removeCart = (item) => {
   if (item.quantity > 1) {
     item.quantity--;
   }
 };
+
+const addToCart = (item) => {
+  item.quantity++;
+};
+
 const DeleteBasket = (index) => {
   store.removeToBasket(index);
 };
 
-const totalPrice = () => {
-  let count = 0;
-  for (const iterator of store.basket) {
-    count += iterator.quantity * iterator.price;
-  }
-  return count;
-};
-const dastafka = () => {
-  let count = 0;
-  for (const iterator of store.basket) {
-    count += (iterator.quantity * iterator.price * 0.15);
-  }
-  return count.toFixed(2);
-};
+const totalPrice = computed(() => {
+  return store.basket.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+});
 
-let Total = Number(totalPrice()) + Number(dastafka())
+const deliveryCost = computed(() => {
+  return (totalPrice.value * 0.15).toFixed(2);
+});
+
+const total = computed(() => {
+  return (Number(totalPrice.value) + Number(deliveryCost.value)).toFixed(2);
+});
 </script>
 
 <style scoped>

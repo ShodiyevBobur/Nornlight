@@ -3,6 +3,7 @@ export const usePiniaStore = defineStore("pinia", {
     return {
       likedProducts: [],
       basket: [],
+      orders: [],
     };
   },
   actions: {
@@ -33,6 +34,21 @@ export const usePiniaStore = defineStore("pinia", {
 
       console.log(this.basket);
     },
+    addOrders(order) {
+      this.orders.push(order);
+
+      // console.log(this.orders);
+    },
+
+
+    removeOrders(order){
+      const index = this.orders.findIndex((item) => item.id === order.id);
+      if (index!== -1) {
+        this.orders.splice(index, 1);
+      }
+
+      // console.log(this.orders);
+    }
   },
   persist: true,
 });

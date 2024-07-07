@@ -5,12 +5,7 @@
         Популярные товары
       </h4>
       <nuxt-link to="/allProduct">
-      <div
-        class="flex items-center py-[8px] cursor-pointer gap-[10px] hover:gap-4 duration-300 w-[220px] rounded-full border border-primary max-md:hidden"
-      >
-        <p class="ml-12 font-medium text-primary">Все товары</p>
-        <p class="text-2xl font-medium mb-1 text-primary">&rarr;</p>
-      </div>
+      
       </nuxt-link>
     </div>
     <div class="grid md:grid-cols-4 max-md:grid-cols-2 md:gap-5">
